@@ -2,8 +2,8 @@ import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => (
   <div>
-    return <Component {...pageProps} />;
+    <Component {...pageProps} />
   </div>
-); //te
+);
 
 export default MyApp;
