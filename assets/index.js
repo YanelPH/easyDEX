@@ -1,12 +1,12 @@
-import uniswap from "./uniswap";
-import search from "./search";
-import ether from "./ether";
-import arrow from "./arrow";
-import arrowup from "./arrowup";
-import close from "./cross";
-import etherlogo from "./etherlogo";
-import homeicon from "./homeicon";
-import lock from "./lock";
+import uniswap from "./uniswap.png";
+import search from "./search.png";
+import ether from "./ether.png";
+import arrow from "./arrow.png";
+import arrowup from "./arrow up.png";
+import close from "./cross.png";
+import etherlogo from "./etherlogo.png";
+import homeicon from "./homeicon.png";
+import lock from "./lock.png";
 
 export default {
   uniswap,
