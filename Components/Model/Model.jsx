@@ -32,7 +32,7 @@ const Model = ({ setOpenModel, connectWallet }) => {
           ))}
         </div>
         <p className={Style.Model_box_para}>
-          By connecting a wallet, you agree to Uniswap Labs'
+          By connecting a wallet, you agree to EasyDEX Labs'
           <br /> Terms of Service and consent to its Privacy Policy.
         </p>
       </div>
