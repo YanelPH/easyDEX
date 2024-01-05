@@ -88,3 +88,21 @@
   align-items: center;
   gap: 1rem;
 }
+
+@media only screen and (max-width: 35em) {
+  .NavBar {
+    width: 90%;
+  }
+  .NavBar_box {
+    grid-template-columns: 0.5fr 1fr;
+  }
+  .NavBar_box_middle {
+    display: none;
+  }
+  .NavBar_box_left_menu {
+    display: none;
+  }
+  .NavBar_box_right_box {
+    display: none;
+  }
+}
