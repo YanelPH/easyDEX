@@ -1,7 +1,7 @@
 .Token {
   position: absolute;
   margin: 0 auto;
-  background-color: #1e1e1e;
+  background-color: #111927;
   padding: 2rem;
   border-radius: 0.5rem;
   width: 30rem;
@@ -32,7 +32,7 @@
 }
 
 .Token_box_input button {
-  background-color: #cff80b;
+  background-color: #004074;
   border: 0;
   outline: 0;
   padding: 0.5rem 1rem;
@@ -47,7 +47,8 @@
   border: 0;
   outline: 0;
   width: 80%;
-  border: 1px solid #cff80b;
+  color: #c2e6ff;
+  border: 1px solid #104d87;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   text-align: end;
