@@ -39,7 +39,7 @@ const Token = ({ setOpenSetting }) => {
         <h2>Interface Setting</h2>
         <div className={Style.Token_box_toggle}>
           <p className={Style.Token_box_para}>Transaction deadline</p>
-          <Toggle />
+          <Toggle label="No" />
         </div>
       </div>
     </div>
