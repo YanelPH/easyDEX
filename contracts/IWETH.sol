@@ -3,9 +3,9 @@
 pragma solidity >=0.7.0 < 0.9.0;
 
 interface IWETH{
-    function deposite() external payable;
+    function deposit() external payable;
 
-    function widthdraw(uint) external;
+    function withdraw(uint) external;
 
     function totalSupply() external view returns (uint);
 
