@@ -11,7 +11,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
     "@uniswap/v3-periphery": "^1.4.3",
-    "ether": "^0.0.9",
+    "ethers": "^5.7.2",
     "next": "^14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
