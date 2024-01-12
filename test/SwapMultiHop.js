@@ -7,8 +7,8 @@ const USDC = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
 
 //writing test
 
-describe("SingleSwapToken", () => {
-  let singleSwapToken;
+describe("SwapMultiHop", () => {
+  let swapMultiHop;
   let accounts;
   let weth;
   let dai;
@@ -17,22 +17,22 @@ describe("SingleSwapToken", () => {
   before(async () => {
     accounts = await ethers.getSigners(1);
 
-    const SingleSwapToken = await ethers.getContractFactory("SingleSwapToken");
-    singleSwapToken = await SingleSwapToken.deploy();
+    const SwapMultiHop = await ethers.getContractFactory("SwapMultiHop");
+    swapMultiHop = await SwapMultiHop.deploy();
 
-    await singleSwapToken.deployed();
+    await swapMultiHop.deployed();
 
     weth = await ethers.getContractAt("IWETH", WETH9);
     dai = await ethers.getContractAt("IERC20", DAI);
     usdc = await ethers.getContractAt("IERC20", USDC);
 
-    console.log("SingleSwapToken Address:", singleSwapToken.address);
+    console.log("SwapMultiHop Address:", swapMultiHop.address);
     console.log("WETH Address:", weth.address);
     console.log("DAI Address:", dai.address);
     console.log("USDC Address:", usdc.address);
   });
 
-  it("swapExactInputSingle", async () => {
+  it("swapExactInputMultihop", async () => {
     const amountIn = 10n ** 18n;
     // Deposit WETH
     console.log("Depositing WETH...");
@@ -40,11 +40,11 @@ describe("SingleSwapToken", () => {
     console.log("WETH deposited.");
 
     console.log("Approving for Swap...");
-    await weth.approve(singleSwapToken.address, amountIn);
+    await weth.approve(swapMultiHop.address, amountIn);
     console.log("Approval complete.");
     //SWAP
     console.log("Swapping...");
-    await singleSwapToken.swapExactInputSingle(amountIn);
+    await swapMultiHop.swapExactInputMultihop(amountIn);
     console.log("Swap complete.");
     console.log("DAI Balance:", await dai.balanceOf(accounts[0].address));
 
@@ -52,9 +52,9 @@ describe("SingleSwapToken", () => {
     // console.log(dai);
     // console.log(usdc);
     // console.log(accounts);
-    // console.log(singleSwapToken);
+    // console.log(SwapMultiHop);
   });
-  it("swapExactOutputSingle", async () => {
+  it("swapExactOutputMultihop", async () => {
     const wethAmountInMax = 10n ** 18n;
     const daiAmountOut = 100n * 10n ** 18n;
 
@@ -64,15 +64,16 @@ describe("SingleSwapToken", () => {
     console.log("WETH deposited.");
 
     console.log("Approving for Swap...");
-    await weth.approve(singleSwapToken.address, wethAmountInMax);
+    await weth.approve(swapMultiHop.address, wethAmountInMax);
     console.log("Approval complete.");
 
     // SWAP
     console.log("Swapping...");
-    await singleSwapToken.swapExactOutputSingle(daiAmountOut, wethAmountInMax);
+    await swapMultiHop.swapExactOutputMultihop(daiAmountOut, wethAmountInMax);
+    console.log("Swap complete.");
     console.log(accounts[0].address);
-    console.log(accounts[1].address);
+    //   console.log(accounts[1].address);
     console.log("Dai balance", await dai.balanceOf(accounts[0].address));
-    console.log("Dai balance", await dai.balanceOf(accounts[1].address));
+    //   console.log("Dai balance", await dai.balanceOf(accounts[1].address));
   });
 });
