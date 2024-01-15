@@ -73,7 +73,7 @@ export const SwapTokenContextProvider = ({ children }) => {
         tokenData.push({
           name: name,
           symbol: symbol,
-          tokenBalance: convertBal,
+          tokenBalance: convertTokenBal,
         });
 
         console.log(tokenData);
@@ -103,7 +103,15 @@ export const SwapTokenContextProvider = ({ children }) => {
   }, []);
   return (
     <SwapTokenContext.Provider
-      value={{ account, weth9, dai, networkConnect, ether }}
+      value={{
+        account,
+        weth9,
+        dai,
+        networkConnect,
+        ether,
+        connectWallet,
+        tokenData,
+      }}
     >
       {children}
     </SwapTokenContext.Provider>
