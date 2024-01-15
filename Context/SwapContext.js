@@ -55,7 +55,7 @@ export const SwapTokenContextProvider = ({ children }) => {
       //GET NETWORKNAME
       const network = await provider.getNetwork();
       setNetworkConnect(network.name);
-      console.log(network);
+      //console.log(network);
 
       //ALLTOKEN BALANCE AND DAta
       addToken.map(async (element, index) => {
@@ -76,7 +76,7 @@ export const SwapTokenContextProvider = ({ children }) => {
           tokenBalance: convertTokenBal,
         });
 
-        console.log(tokenData);
+        //console.log(tokenData);
       });
 
       //weth Balance
@@ -93,7 +93,7 @@ export const SwapTokenContextProvider = ({ children }) => {
       const convertdaiTokenBal = ethers.utils.formatEther(daiToken);
       setDai(convertdaiTokenBal);
 
-      console.log(dai, weth9);
+      //console.log(dai, weth9);
     } catch (error) {
       console.log(error);
     }
@@ -101,6 +101,35 @@ export const SwapTokenContextProvider = ({ children }) => {
   useEffect(() => {
     fetchingData();
   }, []);
+
+  //SINGLE SSWAP TOKEN
+  const singleSwapToken = async () => {
+    try {
+      let singleSwapToken;
+      let weth;
+      let dai;
+
+      singleSwapToken = await connectingWithSingleSwapToken();
+      weth = await connectingWithIWTHToken();
+      dai = await connectingWithDAIToken();
+
+      const amountIn = 10n ** 18n;
+      await weth.deposit({ value: amountIn });
+      await weth.approve(singleSwapToken.address, amountIn);
+      //Swap
+      await singleSwapToken.swapExactInputSingle(amountIn, {
+        gasLimit: 300000,
+      });
+      const balance = await dai.balanceOf(account);
+      const transferAmount = BigNumber.from(balance).toString();
+      const ethValue = ethers.utils.formatEther(transferAmount);
+      setDai(ethValue);
+      console.log("Dai Balance:", ethValue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <SwapTokenContext.Provider
       value={{
@@ -111,6 +140,7 @@ export const SwapTokenContextProvider = ({ children }) => {
         ether,
         connectWallet,
         tokenData,
+        singleSwapToken,
       }}
     >
       {children}
