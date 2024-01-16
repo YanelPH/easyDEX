@@ -18,7 +18,7 @@ contract LiquidityExamples is IERC721Receiver{
     //0.01% fee
     uint24 public constant poolFee = 100;
 
-    INonfungiblePositionManager public nonfungiblePositionManager = INonfungiblePositionManager();
+    INonfungiblePositionManager public nonfungiblePositionManager = INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
 
     //@notice Represents the deposit of an NFT
     struct Deposit {
@@ -35,12 +35,12 @@ contract LiquidityExamples is IERC721Receiver{
     uint public tokenId;
 
     // Implement 'onERC721Receiver' so this contract can receive custody of erc721 token
-    function onERC721Received(address operator, address, uint tokenId, bytes calldata) external override returns(bytes4){
+    function onERC721Received(address operator, address, uint _tokenId, bytes calldata) external override returns(bytes4){
             _createDeposit(operator, _tokenId);
             return this.onERC721Received.selector;
     }
 
-    funciton _createDeposit(address owner, uint _tokenId) internal {(
+    function _createDeposit(address owner, uint _tokenId) internal {(
         ,
         ,
         address token0,
@@ -53,7 +53,7 @@ contract LiquidityExamples is IERC721Receiver{
         ,
         ,
 
-    )= nonfungiblePositionManager.positions(_tokenId)
+    )= nonfungiblePositionManager.positions(_tokenId);
     //set the owner and data for position
     // operator is msg.msg.sender
     deposits[_tokenId] = Deposit({
@@ -66,7 +66,7 @@ contract LiquidityExamples is IERC721Receiver{
     console.log("Token id", _tokenId);
     console.log("Liquidity", liquidity);
 
-    tokenId = _tokenId
+    tokenId = _tokenId;
     }
 
     function mintNewPosition() external returns (uint _tokenId, uint128 liquidity, uint amount0, uint amount1){
@@ -94,7 +94,7 @@ contract LiquidityExamples is IERC721Receiver{
             amount1Min: 0,
             recipient: address(this),
             deadline: block.timestamp
-        })
+        });
         //Noth that the pool defined by DAI/USDC and fee tier 0.01% must
         //already be created and initialized in order to mint
         (_tokenId, liquidity, amount0, amount1) = nonfungiblePositionManager.mint(params);
@@ -124,7 +124,7 @@ contract LiquidityExamples is IERC721Receiver{
             recipient: address(this),
             amount0Max: type(uint128).max,
             amount1Max: type(uint128).max
-        })
+        });
         
         (amount0, amount1) = nonfungiblePositionManager.collect(params);
 
@@ -146,9 +146,9 @@ contract LiquidityExamples is IERC721Receiver{
             amount0Min: 0,
             amount1Min: 0,
             deadline: block.timestamp
-        })
+        });
 
-        (liquidity, amount0, amount1) = nonfungiblePositionManager.IncreaseLiquidity(params);
+        (liquidity, amount0, amount1) = nonfungiblePositionManager.increaseLiquidity(params);
         console.log("liquidity", liquidity);
         console.log("amount 0", amount0);
         console.log("amount 1", amount1);
@@ -173,13 +173,13 @@ contract LiquidityExamples is IERC721Receiver{
     }
 
     function decreaseLiquidity(uint128 liquidity) external returns (uint amount0, uint amount1){
-        INonfungiblePositionManager.decreaseLiquidityParams memory params = INonfungiblePositionManager.decreaseLiquidityParams({
+        INonfungiblePositionManager.DecreaseLiquidityParams memory params = INonfungiblePositionManager.DecreaseLiquidityParams({
             tokenId: tokenId,
             liquidity: liquidity,
             amount0Min: 0,
             amount1Min: 0,
             deadline: block.timestamp
-        })
+        });
         (amount0, amount1) = nonfungiblePositionManager.decreaseLiquidity(params);
 
         console.log("amount 0", amount0);

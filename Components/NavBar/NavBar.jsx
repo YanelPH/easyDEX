@@ -45,10 +45,7 @@ const NavBar = () => {
           {/* MENU ITEMS */}
           <div className={Style.NavBar_box_left_menu}>
             {menuItems.map((element, index) => (
-              <Link
-                key={index + 1}
-                href={{ pathname: `${element.name}`, query: `${element.link}` }}
-              >
+              <Link key={index + 1} href={{ pathname: `${element.name}` }}>
                 <p className={Style.NavBar_box_left_menu_item}>
                   {element.name}
                 </p>
