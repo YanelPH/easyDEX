@@ -98,9 +98,9 @@ export const SwapTokenContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-  // useEffect(() => {
-  //   fetchingData();
-  // }, []);
+  useEffect(() => {
+    fetchingData();
+  }, []);
 
   //SINGLE SSWAP TOKEN
   const singleSwapToken = async () => {

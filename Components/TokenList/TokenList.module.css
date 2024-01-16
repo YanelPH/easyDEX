@@ -2,7 +2,7 @@
   position: absolute;
   width: 20rem;
   border-radius: 0.5rem;
-  background-color: #1e1e1e;
+  background-color: #0d2847;
   margin-top: 2rem;
   margin-left: 66.4rem;
   padding: 1rem;
@@ -14,7 +14,7 @@
   padding: 0.2rem 1rem;
   font-weight: 900;
   line-height: 0;
-  color: #cff80b;
+  color: #c2e6ff;
   font-size: 0.8rem;
   border-radius: 0.5rem;
 }
@@ -30,7 +30,7 @@
 .TokenList_box {
   position: relative;
   cursor: pointer;
-  border-bottom: 1px solid #d1f80b53;
+  border-bottom: 1px solid #104d87;
 }
 
 .TokenList_box_info {
@@ -41,15 +41,15 @@
 }
 .TokenList_box_info p span {
   font-weight: 900;
-  color: #cff80b;
+  color: #c2e6ff;
   margin-right: 0.5rem;
 }
 
 .TokenList_box_info_symbol {
-  background-color: #cff80b;
+  background-color: #004074;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  color: #1e1e1e;
+  color: #c2e6ff;
   font-weight: 700;
 }
 @media only screen and (max-width: 35em) {

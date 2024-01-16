@@ -24,31 +24,31 @@
   gap: 0.5rem;
   font-size: 1.2rem;
   font-weight: 700;
-  background-color: #1e1e1e;
+  background-color: #0d2847;
   padding: 0rem 2rem;
   line-height: 0;
   border-radius: 0.5rem;
-  color: #cff80b;
-  border: 1px solid #d1f80b53;
+  color: #c2e6ff;
+  border: 1px solid #104d87;
 }
 
 .Tokens_box_search {
   display: flex;
   align-items: center;
   gap: 1rem;
-  background-color: #1e1e1e;
+  background-color: #0d2847;
   padding: 0.2rem 2rem;
   line-height: 0;
   border-radius: 0.5rem;
   width: 50%;
-  border: 1px solid #d1f80b53;
+  border: 1px solid #104d87;
 }
 
 .Tokens_box_search input {
   background-color: transparent;
   outline: none;
   border: 0;
-  color: #cff80b;
+  color: #c2e6ff;
   width: 90%;
 }
 
