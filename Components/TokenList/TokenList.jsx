@@ -26,9 +26,9 @@ const TokenList = ({ tokenDate, setOpenTokenBox }) => {
       {tokenList.map((element, index) => (
         <div className={Style.TokenList_box}>
           <div className={Style.TokenList_box_info}>
-            <p className={Style.TokenList_box_info_symbol}>{element.name}</p>
+            <p className={Style.TokenList_box_info_symbol}>{element.symbol}</p>
             <p>
-              <span>{element.tokenBalance}</span> {element.symbol}
+              <span>{element.tokenBalance}</span> {element.name}
             </p>
           </div>
         </div>

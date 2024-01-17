@@ -9,6 +9,7 @@ import homeicon from "./homeicon.png";
 import lock from "./lock.png";
 import wallet from "./wallet.png";
 import arrowLeft from "./arrowLeft.png";
+import loading from "./loading.gif";
 
 export default {
   uniswap,
@@ -22,4 +23,5 @@ export default {
   lock,
   wallet,
   arrowLeft,
+  loading,
 };

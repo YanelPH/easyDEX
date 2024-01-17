@@ -8,48 +8,53 @@ import images from "../../assets";
 const SearchToken = ({ openToken, tokens, tokenData }) => {
   //Usestate
   const [active, setActive] = useState(1);
-  const coin = [
-    {
-      img: images.ether,
-      name: "ETH",
-    },
-    {
-      img: images.ether,
-      name: "DAI",
-    },
-    {
-      img: images.ether,
-      name: "DOG",
-    },
-    {
-      img: images.ether,
-      name: "FUN",
-    },
-    {
-      img: images.ether,
-      name: "WETH9",
-    },
-    {
-      img: images.ether,
-      name: "UNI",
-    },
-    {
-      img: images.ether,
-      name: "TIME",
-    },
-    {
-      img: images.ether,
-      name: "LOO",
-    },
-    {
-      img: images.ether,
-      name: "OOO",
-    },
-    {
-      img: images.ether,
-      name: "HEY",
-    },
-  ];
+
+  let tokenList = [];
+  for (let i = 0; i < tokenData.length; i++) {
+    if (i % 2 == 1) tokenList.push(tokenData[i]);
+  }
+  // const coin = [
+  //   {
+  //     img: images.ether,
+  //     name: "ETH",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "DAI",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "DOG",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "FUN",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "WETH9",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "UNI",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "TIME",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "LOO",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "OOO",
+  //   },
+  //   {
+  //     img: images.ether,
+  //     name: "HEY",
+  //   },
+  // ];
 
   return (
     <div className={Style.SearchToken}>
@@ -71,13 +76,19 @@ const SearchToken = ({ openToken, tokens, tokenData }) => {
           <input type="text" placeholder="Search name and past the address" />
         </div>
         <div className={Style.SearchToken_box_tokens}>
-          {coin.map((element, index) => (
+          {tokenList.map((element, index) => (
             <span
               key={index + 1}
               className={active == index + 1 ? `${Style.active}` : ""}
               onClick={() => (
                 setActive(index + 1),
-                tokens({ name: element.name, image: element.img })
+                tokens({
+                  name: element.name,
+                  image: element.img,
+                  symbol: element.symbol,
+                  tokenBalance: element.tokenBalance,
+                  tokenAddress: element,
+                })
               )}
             >
               <Image
@@ -86,7 +97,7 @@ const SearchToken = ({ openToken, tokens, tokenData }) => {
                 width={30}
                 height={30}
               />
-              {element.name}
+              {element.symbol}
             </span>
           ))}
         </div>

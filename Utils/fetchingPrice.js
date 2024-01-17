@@ -2,7 +2,7 @@ const { ethers } = require("ethers");
 
 const {
   abi: IUniswapV3PoolABI,
-} = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol");
+} = require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json");
 
 const {
   abi: QuoterABI,
@@ -15,7 +15,7 @@ const MAINNET_URL =
 
 const provider = new ethers.providers.JsonRpcProvider(MAINNET_URL);
 
-const qutorAddress = "0xb27308f9F90D6074633eA1BeBb41C27CE5AB6";
+const quoterAddress = "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
 
 export const getPrice = async (inputAmount, poolAddress) => {
   const poolContract = new ethers.Contract(
@@ -26,7 +26,8 @@ export const getPrice = async (inputAmount, poolAddress) => {
 
   //   console.log(poolContract);
   const tokenAddress0 = await poolContract.token0();
-  const tokenAddress1 = await poolContract.token0();
+  const tokenAddress1 = await poolContract.token1();
+
   console.log(tokenAddress0, tokenAddress1);
 
   const tokenAbi0 = await getAbi(tokenAddress0);
@@ -48,14 +49,20 @@ export const getPrice = async (inputAmount, poolAddress) => {
   const tokenDecimals0 = await tokenContract0.decimals();
   const tokenDecimals1 = await tokenContract1.decimals();
 
-  const quoterContract = new ethers.Contract(qutorAddress, QuoterABI, provider);
+  const quoterContract = new ethers.Contract(
+    quoterAddress,
+    QuoterABI,
+    provider
+  );
 
+  console.log("TESTE", quoterContract);
   const immutables = await getPoolImmutables(poolContract);
 
   const amountIn = ethers.utils.parseUnits(
     inputAmount.toString(),
     tokenDecimals0
   );
+  //CHECK THISSSSSSSS
 
   const quotedAmountOut = await quoterContract.callStatic.quoteExactInputSingle(
     immutables.token0,
@@ -65,7 +72,10 @@ export const getPrice = async (inputAmount, poolAddress) => {
     0
   );
 
+  console.log("Quoted Amount Out:", quotedAmountOut);
+
   const amountOut = ethers.utils.formatUnits(quotedAmountOut, tokenDecimals1);
 
   return [amountOut, tokenSymbol0, tokenSymbol1];
+  //return [tokenSymbol0, tokenSymbol1];
 };
