@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ethers, BigNumber } from "ethers";
 import Web3Modal from "web3modal";
+import { Token, CurrencyAmount, TradeType, Percent } from "@uniswap/sdk-core";
 
 //INTERNAL Import
 import {
@@ -16,6 +17,9 @@ import {
 import { IWETHABI } from "./constants";
 import ERC20 from "./ERC20.json";
 
+import { getPrice } from "../Utils/fetchingPrice";
+import { swapUpdatePrice } from "../Utils/swapUpdatePrice";
+
 export const SwapTokenContext = React.createContext();
 
 export const SwapTokenContextProvider = ({ children }) => {
@@ -29,9 +33,15 @@ export const SwapTokenContextProvider = ({ children }) => {
   const [tokenData, setTokenData] = useState([]);
 
   const addToken = [
-    // "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-    "0xae246e208ea35b3f23de72b697d47044fc594d5f",
-    "0x82bbaa3b0982d88741b275ae1752db85cafe3c65",
+    "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
+    "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+    "0x50327c6c5a14DCaDE707ABad2E27eB517df87AB5",
+    "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+    "0x582d872A1B094FC48F5DE31D3B73F2D9bE47def1",
+    "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+    "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
   ];
 
   //FetchDAta
@@ -74,6 +84,7 @@ export const SwapTokenContextProvider = ({ children }) => {
           name: name,
           symbol: symbol,
           tokenBalance: convertTokenBal,
+          tokenddress: element,
         });
 
         //console.log(tokenData);
@@ -103,7 +114,12 @@ export const SwapTokenContextProvider = ({ children }) => {
   }, []);
 
   //SINGLE SSWAP TOKEN
-  const singleSwapToken = async () => {
+  const singleSwapToken = async ({ token1, token2, swapAmount }) => {
+    console.log(
+      token1.tokenAddress.tokenAddress,
+      token2.tokenAddress.tokenAddress,
+      swapAmount
+    );
     try {
       let singleSwapToken;
       let weth;
@@ -113,13 +129,30 @@ export const SwapTokenContextProvider = ({ children }) => {
       weth = await connectingWithIWTHToken();
       dai = await connectingWithDAIToken();
 
-      const amountIn = 10n ** 18n;
+      const decimals0 = 18;
+
+      const inputAmount = swapAmount;
+      const amountIn = ethers.utils.parseUnits(
+        inputAmount.toString(),
+        decimals0
+      );
+
+      console.log(amountIn);
+
       await weth.deposit({ value: amountIn });
       await weth.approve(singleSwapToken.address, amountIn);
       //Swap
-      await singleSwapToken.swapExactInputSingle(amountIn, {
-        gasLimit: 300000,
-      });
+      const transaction = await singleSwapToken.swapExactInputSingle(
+        token1.tokenAddress.tokenAddress,
+        token2.tokenAddress.tokenAddress,
+        amountIn,
+        {
+          gasLimit: 300000,
+        }
+      );
+      await transaction.wait();
+      console.log(transaction);
+
       const balance = await dai.balanceOf(account);
       const transferAmount = BigNumber.from(balance).toString();
       const ethValue = ethers.utils.formatEther(transferAmount);
@@ -141,6 +174,8 @@ export const SwapTokenContextProvider = ({ children }) => {
         connectWallet,
         tokenData,
         singleSwapToken,
+        getPrice,
+        swapUpdatePrice,
       }}
     >
       {children}
