@@ -1,7 +1,7 @@
 .SearchToken {
   position: absolute;
   margin: 0 auto;
-  background-color: #1e1e1e;
+  background-color: #0d2847;
   padding: 2rem;
   border-radius: 0.5rem;
   width: 30rem;
@@ -16,7 +16,7 @@
 .SearchToken_box_search {
   display: flex;
   align-items: center;
-  background-color: #cff80b;
+  background-color: #004074;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   gap: 1rem;
@@ -26,7 +26,7 @@
   background-color: transparent;
   outline: 0;
   border: 0;
-  color: #1e1e1e;
+  color: #c2e6ff;
   font-weight: 500;
   width: 90%;
 }
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  border: 2px solid #cff80b;
+  border: 2px solid #104d87;
   width: 5.7rem;
   padding: 0.3rem;
   border-radius: 1rem;
@@ -50,8 +50,8 @@
 }
 
 .active {
-  background-color: #cff80b;
-  color: #1e1e1e;
+  background-color: #004074;
+  color: #c2e6ff;
 }
 
 @media only screen and (max-width: 35em) {

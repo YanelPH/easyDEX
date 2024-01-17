@@ -6,7 +6,6 @@ import Link from "next/link";
 import Style from "./NavBar.module.css";
 import images from "../../assets";
 import { Model, TokenList } from "../index";
-import { ST } from "next/dist/shared/lib/utils";
 
 //Context
 import { SwapTokenContext } from "../../Context/SwapContext";

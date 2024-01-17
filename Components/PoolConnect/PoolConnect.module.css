@@ -1,0 +1,55 @@
+.PoolConnect_box {
+  background-color: #0d2847;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.PoolConnect_box_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.PoolConnect_box_header h2 {
+  font-size: 2rem;
+}
+
+.PoolConnect_box_header p {
+  background-color: #004074;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #c2e6ff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.PoolConnect_box_Middle {
+  text-align: center;
+}
+
+.PoolConnect_box_Middle button {
+  background-color: #004074;
+  color: #c2e6ff;
+  border: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 0.5rem 3rem;
+  border-radius: 4rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.PoolConnect_box_info {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  line-height: 0;
+  margin-top: 2rem;
+}
+
+.PoolConnect_box_info_right,
+.PoolConnect_box_info_left {
+  border: 1px solid #2870bd;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
