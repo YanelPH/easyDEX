@@ -84,7 +84,7 @@ export const SwapTokenContextProvider = ({ children }) => {
           name: name,
           symbol: symbol,
           tokenBalance: convertTokenBal,
-          tokenddress: element,
+          tokenAddress: element,
         });
 
         //console.log(tokenData);
@@ -137,7 +137,7 @@ export const SwapTokenContextProvider = ({ children }) => {
         decimals0
       );
 
-      console.log(amountIn);
+      console.log("TETETETE3", amountIn);
 
       await weth.deposit({ value: amountIn });
       await weth.approve(singleSwapToken.address, amountIn);

@@ -77,5 +77,4 @@ export const getPrice = async (inputAmount, poolAddress) => {
   const amountOut = ethers.utils.formatUnits(quotedAmountOut, tokenDecimals1);
 
   return [amountOut, tokenSymbol0, tokenSymbol1];
-  //return [tokenSymbol0, tokenSymbol1];
 };
