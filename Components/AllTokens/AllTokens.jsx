@@ -14,9 +14,9 @@ const AllTokens = ({ allTokenList }) => {
           <p className={Style.hide}>#</p>
           <p>Token name</p>
           <p>Price</p>
-          <p className={Style.hide}>Change</p>
+          <p className={Style.hide}>ValueLockedUSD</p>
           <p className={Style.hide}>
-            TVL{" "}
+            Tx Count{" "}
             <small>
               <Image src={images.question} alt="img" width={15} height={15} />
             </small>{" "}
@@ -25,7 +25,7 @@ const AllTokens = ({ allTokenList }) => {
             <small>
               <Image src={images.arrowPrice} alt="img" width={15} height={15} />
             </small>{" "}
-            Volume{" "}
+            Total Supply{" "}
             <small>
               <Image src={images.question} alt="img" width={15} height={15} />
             </small>{" "}
@@ -33,18 +33,20 @@ const AllTokens = ({ allTokenList }) => {
         </div>
         {allTokenList.map((element, index) => (
           <div className={Style.AllTokens_box_list}>
-            <p className={Style.hide}>{element.number}</p>
+            <p className={Style.hide}>{index + 1}</p>
             <p className={Style.AllTokens_box_list_para}>
               <small>
-                <Image src={element.image} alt="logo" width={25} height={25} />
+                <Image src={images.uniswap} alt="logo" width={25} height={25} />
               </small>
               <small>{element.name}</small>
               <small>{element.symbol}</small>
             </p>
-            <p>{element.price}</p>
-            <p className={Style.hide}>{element.change}</p>
-            <p className={Style.hide}>{element.tvl}</p>
-            <p className={Style.hide}>{element.volume}</p>
+            <p>{element.volumeUSD.slice(0, 9)}</p>
+            <p className={Style.hide}>
+              {element.totalValueLockedUSD.slice(0, 9)}
+            </p>
+            <p className={Style.hide}>{element.txCount.slice(0, 9)}</p>
+            <p className={Style.hide}>{element.totalSupply.slice(0, 9)}</p>
           </div>
         ))}
       </div>

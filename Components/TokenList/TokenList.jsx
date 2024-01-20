@@ -28,7 +28,7 @@ const TokenList = ({ tokenDate, setOpenTokenBox }) => {
           <div className={Style.TokenList_box_info}>
             <p className={Style.TokenList_box_info_symbol}>{element.symbol}</p>
             <p>
-              <span>{element.tokenBalance}</span> {element.name}
+              <span>{element.tokenBalance.slice(0, 9)}</span> {element.name}
             </p>
           </div>
         </div>

@@ -1,17 +1,17 @@
 import { AlphaRouter } from "@uniswap/smart-order-router";
 import { ethers, BigNumber } from "ethers";
 import { Token, CurrencyAmount, TradeType, Percent } from "@uniswap/sdk-core";
-
 //GET DATA RIGHT
 const V3_SWAP_ROUTER_ADDRESS = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
 
 //GET PRICE
 const chainId = 1;
 
-const MAINNET_URL =
-  "https://eth-mainnet.g.alchemy.com/v2/mCgRbSNJIhTJv5tiqIkrfcqzLHjOoz0F";
+//const MAINNET_URL ="https://eth-mainnet.g.alchemy.com/v2/mCgRbSNJIhTJv5tiqIkrfcqzLHjOoz0F";
 
-const provider = new ethers.providers.JsonRpcProvider(MAINNET_URL);
+const provider = new ethers.providers.JsonRpcProvider(
+  "https://eth-mainnet.g.alchemy.com/v2/mCgRbSNJIhTJv5tiqIkrfcqzLHjOoz0F"
+);
 
 const router = new AlphaRouter({ chainId: chainId, provider: provider });
 
@@ -40,13 +40,14 @@ export const swapUpdatePrice = async (
     WETH,
     BigNumber.from(wei)
   );
-
+  //deadline = Math.floor(Date.now() / 1000) + 10 * 60;
+  console.log("hello", currencyAmount);
   const route = await router.route(currencyAmount, DAI, TradeType.EXACT_INPUT, {
     recipient: walletAddress,
     slippageTolerance: percentSlippage,
     deadline: deadline,
   });
-
+  console.log("done");
   const transaction = {
     data: route.methodParameters.calldata,
     to: V3_SWAP_ROUTER_ADDRESS,
@@ -59,6 +60,6 @@ export const swapUpdatePrice = async (
   const quoteAmountOut = route.quote.toFixed(6);
   const ratio = (inputAmount / quoteAmountOut).toFixed(3);
 
-  console.log("QUOTTEE", quoteAmountOut, ratio);
+  console.log(quoteAmountOut, ratio);
   return [transaction, quoteAmountOut, ratio];
 };

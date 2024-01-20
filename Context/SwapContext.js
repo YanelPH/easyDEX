@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ethers, BigNumber } from "ethers";
 import Web3Modal from "web3modal";
 import { Token, CurrencyAmount, TradeType, Percent } from "@uniswap/sdk-core";
-
+import axios from "axios";
 //INTERNAL Import
 import {
   checkIfWalletConnected,
@@ -37,23 +37,30 @@ export const SwapTokenContextProvider = ({ children }) => {
 
   const [tokenData, setTokenData] = useState([]);
   const [getAllLiquidity, setGetAllLiquidity] = useState([]);
+  //TOPTOKENLIST
+  const [topTokensList, setTopTokensList] = useState([]);
 
   const addToken = [
-    "0xF8b299F87EBb62E0b625eAF440B73Cc6b7717dbd",
-    "0xEb0fCBB68Ca7Ba175Dc1D3dABFD618e7a3F582F6",
-    "0xaE2abbDE6c9829141675fA0A629a675badbb0d9F",
+    //mytoken
+    // "0xF8b299F87EBb62E0b625eAF440B73Cc6b7717dbd",
+    // "0xEb0fCBB68Ca7Ba175Dc1D3dABFD618e7a3F582F6",
+    // "0xaE2abbDE6c9829141675fA0A629a675badbb0d9F",
     // "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-    // "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-    // "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-    // "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-    // "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-    // "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
-    // "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
-    // "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-    // "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+    "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
+    "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+
     // "0xe044814c9eD1e6442Af956a817c161192cBaE98F",
     // "0xaB837301d12cDc4b97f1E910FC56C9179894d9cf",
     // "0x4ff1f64683785E0460c24A4EF78D582C2488704f",
+    //mytokenlast
+    "0x0D92d35D311E54aB8EEA0394d7E773Fc5144491a",
+    "0x24EcC5E6EaA700368B8FAC259d3fBD045f695A08",
+    "0x876939152C56362e17D508B9DEA77a3fDF9e4083",
   ];
 
   //FetchDAta
@@ -129,6 +136,33 @@ export const SwapTokenContextProvider = ({ children }) => {
       // setDai(convertdaiTokenBal);
 
       //console.log(dai, weth9);
+
+      const URL = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3";
+
+      const query = `
+        {
+          tokens(orderBy: volumeUSD, orderDirection: desc, first:20){
+            id
+            name
+            symbol
+             decimals
+            volume
+            volumeUSD
+             totalSupply
+             feesUSD
+             txCount
+             poolCount
+             totalValueLockedUSD
+             totalValueLocked
+             derivedETH
+          }
+        }
+        `;
+
+      const axiosData = await axios.post(URL, { query: query });
+      console.log(axiosData.data.data.tokens);
+      console.log(axiosData.data.data.tokens);
+      setTopTokensList(axiosData.data.data.tokens);
     } catch (error) {
       console.log(error);
     }
@@ -223,8 +257,6 @@ export const SwapTokenContextProvider = ({ children }) => {
         decimals0
       );
 
-      console.log("TETETETE3", amountIn);
-
       await weth.deposit({ value: amountIn });
       await weth.approve(singleSwapToken.address, amountIn);
       //Swap
@@ -237,7 +269,7 @@ export const SwapTokenContextProvider = ({ children }) => {
         }
       );
       await transaction.wait();
-      console.log(transaction);
+      console.log("transac", transaction);
 
       const balance = await dai.balanceOf(account);
       const transferAmount = BigNumber.from(balance).toString();
@@ -264,6 +296,7 @@ export const SwapTokenContextProvider = ({ children }) => {
         swapUpdatePrice,
         createLiquidityAndPool,
         getAllLiquidity,
+        topTokensList,
       }}
     >
       {children}

@@ -28,7 +28,7 @@ export const IWETHABI = IWETH.abi;
 //StoreUserData
 
 export const userStorageDataAddress =
-  "0xD28F3246f047Efd4059B24FA1fa587eD9fa3e77F";
+  "0x29023DE63D7075B4cC2CE30B55f050f9c67548d4";
 export const userStorageDataABI = userStorageData.abi;
 
 // BOO deployed to 0xAE246E208ea35B3F23dE72b697D47044FC594D5F

@@ -4,8 +4,8 @@ const { ethers, network } = require("hardhat");
 const DAI = "0x6b175474e89094c44da98b954eedeac495271d0f";
 const WETH9 = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
 const USDC = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
-const DAI_WHALE = "0xcc0D65e83eb589875c8dbe279809a47Dd1c32859";
-const USDC_WHALE = "0xcc0D65e83eb589875c8dbe279809a47Dd1c32859";
+const DAI_WHALE = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
+const USDC_WHALE = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 
 describe("LiquidityExamples", () => {
   let liquidityExamples;

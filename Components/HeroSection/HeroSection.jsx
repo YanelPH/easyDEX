@@ -50,10 +50,11 @@ const HeroSection = ({}) => {
   });
 
   const callOutPut = async (value) => {
-    const yourAccount = "0xcc0D65e83eb589875c8dbe279809a47Dd1c32859";
+    //const yourAccount = "0xcc0D65e83eb589875c8dbe279809a47Dd1c32859";
+    const yourAccount = "0x8813c2a42DdaFd151178B52000e6de42Fa8DeFC0";
     const deadline = 10;
     const slippageAmount = 25;
-
+    console.log("hero", value);
     const data = await swapUpdatePrice(
       value,
       slippageAmount,
