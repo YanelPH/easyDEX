@@ -80,7 +80,7 @@ const NavBar = () => {
           )}
 
           {openModel && (
-            <Model setOpenModel={setOpenModel} connectWalletm={connectWallet} />
+            <Model setOpenModel={setOpenModel} connectWallet={connectWallet} />
           )}
         </div>
       </div>

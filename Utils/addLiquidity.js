@@ -4,12 +4,12 @@ import { Token } from "@uniswap/sdk-core";
 import { Pool, Position, nearestUsableTick } from "@uniswap/v3-sdk";
 
 //Uniswap contract addresses
-wethAddress = "0x82BBAA3B0982D88741B275aE1752DB85CAfe3c65";
-factoryAddress = "0x084815D1330eCC3eF94193a19Ec222C0C73dFf2d";
-swapRouterAddress = "0x76a999d5F7EFDE0a300e710e6f52Fb0A4b61aD58";
-nftDescriptorAddress = "0x02e8910B3B89690d4aeC9fcC0Ae2cD16fB6A4828";
-positionDescriptorAddress = "0x564Db7a11653228164FD03BcA60465270E67b3d7";
-positionManagerAddress = "0x9abb5861e3a1eDF19C51F8Ac74A81782e94F8FdC";
+const wethAddress = "0x76a999d5F7EFDE0a300e710e6f52Fb0A4b61aD58";
+const factoryAddress = "0x02e8910B3B89690d4aeC9fcC0Ae2cD16fB6A4828";
+const swapRouterAddress = "0x564Db7a11653228164FD03BcA60465270E67b3d7";
+const nftDescriptorAddress = "0x9abb5861e3a1eDF19C51F8Ac74A81782e94F8FdC";
+const positionDescriptorAddress = "0x484242986F57dFcA98EeC2C78427931C63F1C4ce";
+const positionManagerAddress = "0x9DBb24B10502aD166c198Dbeb5AB54d2d13AfcFd";
 
 const artifacts = {
   NonfungiblePositionManager: require("@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json"),
@@ -29,7 +29,7 @@ async function getPoolData(poolContract) {
     tickSpacing: tickSpacing,
     fee: fee,
     liquidity: liquidity,
-    sqrtPriceX96: slot[0],
+    sqrtPriceX96: slot0[0],
     tick: slot0[1],
   };
 }
@@ -75,7 +75,7 @@ export const addLiquidityExternal = async (
 
   const poolContract = new Contract(
     poolAddress,
-    artifact.UniswapV3Pool.abi,
+    artifacts.UniswapV3Pool.abi,
     provider
   );
 
@@ -120,7 +120,7 @@ export const addLiquidityExternal = async (
     poolData.tick
   );
 
-  const position = newPosition({
+  const position = new Position({
     pool: pool,
     liquidity: ethers.utils.parseEther("1"),
     tickLower:
@@ -135,7 +135,7 @@ export const addLiquidityExternal = async (
     position.mintAmounts;
 
   const params = {
-    token0: token1Address1,
+    token0: tokenAddress1,
     token1: tokenAddress2,
     fee: poolData.fee,
     tickLower:

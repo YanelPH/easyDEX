@@ -12,9 +12,11 @@ import {
   SwapMultiHopABI,
   IWETHAddress,
   IWETHABI,
+  userStorageDataAddress,
+  userStorageDataABI,
 } from "../Context/constants";
 
-//Check If Wallet is connected
+//CHECK IF WALLET IS CONNECT
 export const checkIfWalletConnected = async () => {
   try {
     if (!window.ethereum) return console.log("Install MetaMask");
@@ -28,7 +30,7 @@ export const checkIfWalletConnected = async () => {
   }
 };
 
-//connect Wallet
+//CONNECT WALLET
 export const connectWallet = async () => {
   try {
     if (!window.ethereum) return console.log("Install MetaMask");
@@ -158,6 +160,28 @@ export const connectingWithDAIToken = async () => {
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
     const contract = fetchDAIContract(signer);
+    return contract;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//USER CONTRACT CONNECTION---------
+export const fetchUserStorageContract = (signerOrProvider) =>
+  new ethers.Contract(
+    userStorageDataAddress,
+    userStorageDataABI,
+    signerOrProvider
+  );
+
+//CONNECTING With SingleSwapToken TOKEN CONTRACT
+export const connectingWithUserStorageContract = async () => {
+  try {
+    const web3modal = new Web3Modal();
+    const connection = await web3modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+    const contract = fetchUserStorageContract(signer);
     return contract;
   } catch (error) {
     console.log(error);

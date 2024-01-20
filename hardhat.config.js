@@ -38,6 +38,13 @@ module.exports = {
       },
     },
   },
+  // defaultNetwork: "hardhat",
+  // networks: {
+  //   localhost: {
+  //     chainId: 31337,
+  //     allowUnlimitedContractSize: true,
+  //   },
+  // },
   networks: {
     hardhat: {
       forking: {

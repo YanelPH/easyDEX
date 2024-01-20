@@ -4,7 +4,7 @@ import { Contract, ethers } from "ethers";
 import { Pool, tickToPrice } from "@uniswap/v3-sdk";
 import { Token } from "@uniswap/sdk-core";
 import ERC20 from "../Context/ERC20.json";
-import { ChainId } from "@uniswap/smart-order-router";
+//import { ChainId } from "@uniswap/smart-order-router";
 
 async function getPoolData(poolContract, tokenAddress1, tokenAddress2) {
   const [
@@ -29,11 +29,11 @@ async function getPoolData(poolContract, tokenAddress1, tokenAddress2) {
   const web3modal = await new Web3Modal();
   const connection = await web3modal.connect();
   const provider = new ethers.providers.Web3Provider(connection);
-
-  const token0Contract = new Contract(tokenAddress1, ERC20, provider);
-  const token1Contract = new Contract(tokenAddress2, ERC20, provider);
-
-  const { chainID } = await provider.getNetwork();
+  console.log("OOOOOOOO");
+  const token0Contract = new Contract(tokenAddress1, ERC20.abi, provider);
+  const token1Contract = new Contract(tokenAddress2, ERC20.abi, provider);
+  console.log("OOOOOOOO");
+  const { chainId } = await provider.getNetwork();
 
   //Token0
   const token0Name = await token0Contract.name();
@@ -48,7 +48,7 @@ async function getPoolData(poolContract, tokenAddress1, tokenAddress2) {
   const token1Address = await token1Contract.address;
 
   const TokenA = new Token(
-    ChainId,
+    chainId,
     token0Address,
     token0Decimals,
     token0Symbol,
@@ -56,7 +56,7 @@ async function getPoolData(poolContract, tokenAddress1, tokenAddress2) {
   );
 
   const TokenB = new Token(
-    ChainId,
+    chainId,
     token1Address,
     token1Decimals,
     token1Symbol,
@@ -67,7 +67,7 @@ async function getPoolData(poolContract, tokenAddress1, tokenAddress2) {
     TokenA,
     TokenB,
     fee,
-    slot[0].toString(),
+    slot0[0].toString(),
     liquidity.toString(),
     slot0[1]
   );

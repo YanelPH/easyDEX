@@ -89,8 +89,8 @@
 }
 
 .PoolAdd_box_price_left_list_item_para {
-  background-color: #cff80b;
-  color: #1e1e1e;
+  background-color: #004074;
+  color: #c2e6ff;
   border-radius: 0.5rem;
   padding: 0.3rem;
 }
@@ -206,9 +206,51 @@
   font-size: 1.2rem;
   font-weight: 500;
 }
-
+/* ///NEWCSS */
 .token {
   position: absolute;
-  top: 0rem;
-  right: 32rem;
+  background-color: #0d2847;
+  inset: 0 0 0 0;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  border: 1px solid #2870bd;
+}
+
+.PoolAdd_box_price_right_range_box_para {
+  background-color: #004074;
+  border: 0;
+  outline: 0;
+  width: 80%;
+  height: 2rem;
+  color: #c2e6ff;
+
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+}
+
+@media only screen and (max-width: 35em) {
+  .PoolAdd_box_price {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .PoolAdd_box_price_left_token_info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #0d2847;
+    border-radius: 0.5rem;
+    color: #c2e6ff;
+    padding: 0 0.5rem;
+    font-weight: 700;
+  }
+
+  .token {
+    position: absolute;
+    background-color: #0d2847;
+    inset: 0% 0% 50% 0%;
+    display: flex;
+    border: 1px solid #2870bd;
+  }
 }

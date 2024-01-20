@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 
 //Internal import
 import Style from "../styles/Pools.module.css";
 import images from "../assets";
 import { PoolAdd, PoolConnect } from "../Components/index";
+import { SwapTokenContext } from "../Context/SwapContext";
 
 const Pool = () => {
+  const { account, createLiquidityAndPool, tokenData, getAllLiquidity } =
+    useContext(SwapTokenContext);
+
+  const [closePool, setClosePool] = useState(false);
   return (
     <div className={Style.Pool}>
-      <PoolAdd />
-      <PoolConnect />
+      {closePool ? (
+        <PoolAdd
+          account={account}
+          setClosePool={setClosePool}
+          tokenData={tokenData}
+          createLiquidityAndPool={createLiquidityAndPool}
+        />
+      ) : (
+        <PoolConnect
+          setClosePool={setClosePool}
+          getAllLiquidity={getAllLiquidity}
+          account={account}
+        />
+      )}
     </div>
   );
 };
